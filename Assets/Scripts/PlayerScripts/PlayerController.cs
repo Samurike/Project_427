@@ -17,10 +17,12 @@ public class PlayerController : MonoBehaviour
     public bool wait;
     private int num;
     private bool grounded;
+    private Animator anim;
 
     // Use this for initialization
     void Start()
     {
+        anim = this.GetComponent<Animator>();
     }
 
 
@@ -74,15 +76,15 @@ public class PlayerController : MonoBehaviour
         ///
         if ((Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.E)) && !wait && this.GetComponent<ChaScript>().combat)
         {
-            if (Input.GetKey(KeyCode.Q))
+            if (anim.GetInteger("animation") == 200 && !anim.GetCurrentAnimatorStateInfo(0).IsName("runNormal"))
             {
                 num = 0;
                 StartCoroutine("Dodge");
             }
-            if (Input.GetKey(KeyCode.E))
+            if (anim.GetInteger("animation") == 210 && !anim.GetCurrentAnimatorStateInfo(0).IsName("runNormal"))
             {
                 num = 1;
-                StartCoroutine("Dodge", 1);
+                StartCoroutine("Dodge");
             }
         }
 
@@ -105,7 +107,7 @@ public class PlayerController : MonoBehaviour
         wait = true;
         yield return new WaitForSeconds(.5f);
         dodge = false;
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(2f);
         wait = false;
     }
 

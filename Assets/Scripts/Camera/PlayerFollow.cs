@@ -41,6 +41,7 @@ public class PlayerFollow : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1))
         {
+
             if (toggled)
             {
                 toggled = false;
@@ -57,7 +58,6 @@ public class PlayerFollow : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(targetSpot.transform.position, targetSpot.transform.forward, out hit, range))
             {
-
                 if(hit.transform.tag == "Enemy")
                 {
                     t = hit.transform.GetChild(0).transform;

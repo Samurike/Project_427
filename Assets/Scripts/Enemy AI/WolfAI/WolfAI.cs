@@ -19,8 +19,14 @@ public class WolfAI : MonoBehaviour {
     // Use this for initialization
     void Start () {
         anim = this.GetComponent<Animator>();
-        center = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-	}
+        center = new Vector3(transform.position.x, 0.2f, transform.position.z);
+        x = Random.Range(-10.0f, 10.0f);
+        z = Random.Range(-10.0f, 10.0f);
+        newPos = new Vector3(center.x + x, -.2f, center.z + z);
+        StartCoroutine("Rotate");
+        Debug.Log(transform.position.y);
+    }
+
 	
 	// Update is called once per frame
 	void Update () {
@@ -28,15 +34,24 @@ public class WolfAI : MonoBehaviour {
         switch (currentState)
         {
             case states.wander:
-                if (float.Parse(newPos.x.ToString("F1")) == float.Parse(transform.position.x.ToString("F1")))
+
+                if (System.Math.Round((newPos.x) ,1) == System.Math.Round((transform.position.x), 1))
                 {
-                    x = Random.Range(-20.0f, 20.0f);
-                    z = Random.Range(-20.0f, 20.0f);
-                    newPos = new Vector3(center.x + x, -.8f, center.z + z);
+                    x = Random.Range(10.0f, 16.0f);
+                    if(Random.value > .5f)
+                    {
+                        x *= -1;
+                    }
+                    z = Random.Range(10f, 16.0f);
+                    if (Random.value > .5f)
+                    {
+                        z *= -1;
+                    }
+                    newPos = new Vector3(center.x + x, -.2f, center.z + z);
+                    Debug.Log(newPos);
+                    StartCoroutine("Rotate");
                 }
-                // Wander();
-                Debug.Log(newPos);
-                StartCoroutine("Rotate");
+                 Wander();
                 break;
         }
 
@@ -50,7 +65,7 @@ public class WolfAI : MonoBehaviour {
     private IEnumerator Rotate()
     {
         Quaternion start = transform.rotation;
-        Quaternion finish = Quaternion.FromToRotation(transform.forward,newPos - transform.position);
+        Quaternion finish = Quaternion.LookRotation(newPos);
         float startTime = Time.time;
         float eTime = Time.time - startTime;
         while (eTime <= 1)
@@ -59,15 +74,13 @@ public class WolfAI : MonoBehaviour {
             transform.rotation = Quaternion.Lerp(start, finish, eTime);
             yield return new WaitForEndOfFrame();
         }
+        transform.LookAt(newPos);
 
     }
 
     private void Wander()
     {
-        //anim.SetInteger("animation", 1);
-
-            transform.LookAt(newPos);
-            transform.Translate(Vector3.forward * 8 * Time.deltaTime);
+            transform.Translate(Vector3.forward * 4 * Time.deltaTime);
     }
 
 
