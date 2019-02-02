@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
 
         //transform.position = new Vector3(transform.position.x, -.081f, transform.position.z);
 
-        if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.W) && !(anim.GetCurrentAnimatorStateInfo(0).IsName("dodgeLeft") || anim.GetCurrentAnimatorStateInfo(0).IsName("dodgeRight")))
         {
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
@@ -74,14 +74,14 @@ public class PlayerController : MonoBehaviour
 
         ///////////////////////////////////////////////////////
         ///
-        if ((Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.E)) && !wait && this.GetComponent<ChaScript>().combat)
+        if ((!wait && this.GetComponent<ChaScript>().combat))
         {
-            if (anim.GetInteger("animation") == 200 && !anim.GetCurrentAnimatorStateInfo(0).IsName("runNormal"))
+            if (anim.GetInteger("animation") == 50 && !this.GetComponent<ChaScript>().attacking)
             {
                 num = 0;
                 StartCoroutine("Dodge");
             }
-            if (anim.GetInteger("animation") == 210 && !anim.GetCurrentAnimatorStateInfo(0).IsName("runNormal"))
+            if (anim.GetInteger("animation") == 60 && !this.GetComponent<ChaScript>().attacking)
             {
                 num = 1;
                 StartCoroutine("Dodge");
@@ -107,7 +107,7 @@ public class PlayerController : MonoBehaviour
         wait = true;
         yield return new WaitForSeconds(.5f);
         dodge = false;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         wait = false;
     }
 

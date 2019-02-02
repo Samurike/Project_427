@@ -15,10 +15,8 @@ public class ChaScript : MonoBehaviour
     private bool toggleWait;
     public bool attacking;
 
-    private int animNum;
     private int num;
-    private bool canClick;
-    private int moving;
+    public bool canClick;
     public bool damage;
 
 
@@ -55,10 +53,12 @@ public class ChaScript : MonoBehaviour
 
         //Sets an animation integer up so that we can determine whether or not the player is in motion(Since the 
         //combat uses the same three attacks, they are both used in the same call just in different ways)
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("idleCombat")) {
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("idleCombat"))
+        {
             anim.SetInteger("moving", 0);
+            attacking = false;
         }
-        else { anim.SetInteger("moving", 1); ; }
+        else { anim.SetInteger("moving", 1); }
 
         //combat is a bool that determines whether or not we are in the combat stance.
         if (!combat)
@@ -158,7 +158,6 @@ public class ChaScript : MonoBehaviour
         this.GetComponent<PlayerController>().speed = combatSpeed;
         //Call for direction movement for combat.
         Moving();
-        Dodging();
         //Call for Attack if pressed.
         if (Input.GetMouseButtonDown(0)) {
             Attacking(); }
@@ -169,7 +168,6 @@ public class ChaScript : MonoBehaviour
     //Handles the direction movement for combat.
     void Moving()
     {
-
 
         if (Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.LeftShift))
         {
@@ -199,6 +197,11 @@ public class ChaScript : MonoBehaviour
         if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.LeftShift))
         {
             anim.SetBool("walkLeftCombat", true);
+            if (Input.GetKeyDown(KeyCode.Space) && !this.GetComponent<PlayerController>().wait)
+            {
+                anim.SetBool("walkLeftCombat", false);
+                anim.SetInteger("animation", 50);
+            }
         }
         else
         {
@@ -208,6 +211,11 @@ public class ChaScript : MonoBehaviour
         if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.LeftShift))
         {
             anim.SetBool("walkRightCombat", true);
+            if (Input.GetKeyDown(KeyCode.Space) && !this.GetComponent<PlayerController>().wait)
+            {
+                anim.SetBool("walkRightCombat", false);
+                anim.SetInteger("animation", 60);
+            }
         }
         else
         {
@@ -215,19 +223,6 @@ public class ChaScript : MonoBehaviour
         }
     }
 
-    //allows the player to dodge.
-    void Dodging()
-    {
-        if (Input.GetKey(KeyCode.Q) && !this.GetComponent<PlayerController>().wait)
-        {
-            anim.SetInteger("animation", 200);
-        }
-        if (Input.GetKey(KeyCode.E) && !this.GetComponent<PlayerController>().wait)
-        {
-            anim.SetInteger("animation", 210);
-        }
-
-    }
     //Handles Running and running attack.
     void Running()
     {
@@ -247,6 +242,7 @@ public class ChaScript : MonoBehaviour
     //Handles all Measures of attacks.
     void Attacking()
     {
+        attacking = true;
         //keeps a click counter for combo
         if (canClick && num<=3)
         {
@@ -280,7 +276,7 @@ public class ChaScript : MonoBehaviour
     //they can be assigned at your leisure.
     public void ComboCheck()
     {
-
+        attacking = true;
         canClick = false;
 
 
@@ -329,6 +325,7 @@ public class ChaScript : MonoBehaviour
             StartCoroutine("Wait");
             num = 0;
         }
+
 
     }
 

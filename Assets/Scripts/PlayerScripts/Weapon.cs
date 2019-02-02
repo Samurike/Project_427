@@ -28,7 +28,7 @@ public class Weapon : MonoBehaviour {
 
     private IEnumerator Damage(Collider other)
     {
-        other.GetComponent<Health>().takeDamage(damage);
+        //other.GetComponent<Health>().takeDamage(damage);
         wait = true;
         yield return new WaitForSeconds(.5f);
         wait = false;

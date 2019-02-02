@@ -26,6 +26,7 @@ public class PlayerFollow : MonoBehaviour
     public float range;
     public bool toggled;
 
+
     // Use this for initialization
 
     void Start()
@@ -58,8 +59,9 @@ public class PlayerFollow : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(targetSpot.transform.position, targetSpot.transform.forward, out hit, range))
             {
-                if(hit.transform.tag == "Enemy")
+                if(hit.transform.tag == "Target")
                 {
+
                     t = hit.transform.GetChild(0).transform;
                     Debug.DrawLine(targetSpot.transform.position, hit.transform.position, Color.cyan, 1f);
                 }
