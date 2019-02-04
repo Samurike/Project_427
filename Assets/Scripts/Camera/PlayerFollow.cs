@@ -40,18 +40,6 @@ public class PlayerFollow : MonoBehaviour
         currentX += Input.GetAxis("Mouse X");
         currentY += Input.GetAxis("Mouse Y");
 
-        if (Input.GetMouseButtonDown(1))
-        {
-
-            if (toggled)
-            {
-                toggled = false;
-            }
-            else
-            {
-                toggled = true;
-            }
-        }
 
 
         if (toggled)
@@ -59,9 +47,9 @@ public class PlayerFollow : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(targetSpot.transform.position, targetSpot.transform.forward, out hit, range))
             {
-                if(hit.transform.tag == "Target")
+                if (hit.transform.root.transform.tag == "Enemy")
                 {
-
+                    hit.transform.Find("AimCube");
                     t = hit.transform.GetChild(0).transform;
                     Debug.DrawLine(targetSpot.transform.position, hit.transform.position, Color.cyan, 1f);
                 }
@@ -72,6 +60,20 @@ public class PlayerFollow : MonoBehaviour
         {
             t = PlayerTransform.transform;
         }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+
+            if (toggled)
+            {
+                toggled = false;
+            }
+            else
+            {
+                toggled = true;
+                
+            }
+        }
     }
 
 
@@ -81,24 +83,23 @@ public class PlayerFollow : MonoBehaviour
 
         if (RotateAroundPlayer)
         {
-            Quaternion camH = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * RotationsSpeed, this.transform.up);
-            Quaternion camV = Quaternion.AngleAxis(Input.GetAxis("Mouse Y") * RotationsSpeed, -1 * this.transform.right);
+
+           Quaternion camH = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * RotationsSpeed, this.transform.up);
+           Quaternion camV = Quaternion.AngleAxis(Input.GetAxis("Mouse Y") * RotationsSpeed, -1 * this.transform.right);
 
             cameraOffset = camV * camH * cameraOffset;
-        }
+
+            Vector3 newPos = PlayerTransform.position + cameraOffset;
 
 
+            transform.position = Vector3.Slerp(transform.position, newPos, SmoothFactor);
+                 
+            
 
-        Vector3 newPos = PlayerTransform.position + cameraOffset;
-
-
-
-        transform.position = Vector3.Slerp(transform.position, newPos, SmoothFactor);
-
-        if (LookAtPlayer || RotateAroundPlayer)
-        {
-
+            if (LookAtPlayer || RotateAroundPlayer)
+            {
                 transform.LookAt(t.transform);
+            }
         }
     }
 }

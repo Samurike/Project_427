@@ -21,6 +21,9 @@ public class GoblinAI : MonoBehaviour {
 
     [SerializeField] ChaScript player;
 
+    public enum states { idle, grounded, damaged, attack, chase, death };
+    states currentState = states.chase;
+
     // Use this for initialization
     void Start() {
 
@@ -33,9 +36,32 @@ public class GoblinAI : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
-        float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
+        //float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
+        if (this.GetComponent<Health>().currentHealth == 0)
+        {
+            currentState = states.death;
+        }
+        switch (currentState)
+        {
+            case states.idle:
+                anim.SetInteger("moving", 0);
+                anim.SetInteger("animation", 1);
+                break;
+            case states.chase:
+                anim.SetInteger("moving", 1);
+                break;
+            case states.attack:
+                anim.SetInteger("moving", 2);
+                break;
+            case states.death:
+                anim.SetInteger("moving", 0);
+                anim.SetInteger("animation", 0);
+                break;
+
+        }
 
     }
+
 
 
     private IEnumerator Wander()
@@ -43,6 +69,8 @@ public class GoblinAI : MonoBehaviour {
         yield return new WaitForSeconds(2f);
 
     }
+
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.cyan;

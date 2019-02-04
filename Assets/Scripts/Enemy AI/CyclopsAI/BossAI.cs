@@ -22,6 +22,10 @@ public class BossAI : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        if(this.GetComponent<Health>().currentHealth == 0)
+        {
+            currentState = states.death;
+        }
         switch (currentState)
         {
             case states.idle:
@@ -35,6 +39,10 @@ public class BossAI : MonoBehaviour {
             case states.attack:
                 anim.SetInteger("moving", 2);
                 Attack();
+                break;
+            case states.death:
+                anim.SetInteger("moving", 0);
+                anim.SetInteger("animation", 0);
                 break;
 
         }
@@ -61,6 +69,7 @@ public class BossAI : MonoBehaviour {
     {
         if (Vector3.Distance(player.transform.position, transform.position) < 20)
         {
+            transform.LookAt(player.transform);
             if (!wait) { StartCoroutine("NextAttack"); }   
         }
     }
@@ -83,28 +92,28 @@ public class BossAI : MonoBehaviour {
     public void ComboCheck()
     {
         int num = Random.Range(1,5);
-        Debug.Log(num);
+       // Debug.Log(num);
 
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("leftHandAttackForward") && (num == 1 || num == 2 )){
             anim.SetInteger("animation", 22);
-            Debug.Log("now Right");
+            //Debug.Log("now Right");
             wait = true;
         }else if (anim.GetCurrentAnimatorStateInfo(0).IsName("rightHandAttackForward") && (num == 1 || num == 2))
         {
             anim.SetInteger("animation", 21);
-            Debug.Log("now Left");
+            //Debug.Log("now Left");
             wait = true;
         }
         else if ((anim.GetCurrentAnimatorStateInfo(0).IsName("rightHandAttackForward") || anim.GetCurrentAnimatorStateInfo(0).IsName("leftHandAttackForward")) && num == 4)
         {
             anim.SetInteger("animation", 33);
-            Debug.Log("Boffa");
+            //Debug.Log("Boffa");
             wait = true;
         }
         else if ((anim.GetCurrentAnimatorStateInfo(0).IsName("rightHandAttackForward") || anim.GetCurrentAnimatorStateInfo(0).IsName("leftHandAttackForward")) && num == 3)
         {
             anim.SetInteger("animation", 35);
-            Debug.Log("Rawr");
+           // Debug.Log("Rawr");
             wait = true;
         }
         else

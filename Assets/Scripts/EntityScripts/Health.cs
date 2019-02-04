@@ -6,6 +6,7 @@ public class Health : MonoBehaviour {
 
     public float maxHealth;
     public float currentHealth;
+    private bool wait;
 
 	// Use this for initialization
 	void Start () {
@@ -18,11 +19,15 @@ public class Health : MonoBehaviour {
 
     public void takeDamage(float num)
     {
-        currentHealth -= num;
-        Debug.Log(currentHealth);
-        if(currentHealth <= 0)
+        if (!wait)
         {
-            Debug.Log("He a Dead Boi Now");
+            currentHealth -= num;
+            Debug.Log(currentHealth);
+            if(currentHealth <= 0)
+            {
+                Debug.Log("He a Dead Boi Now");
+            }
         }
+
     }
 }

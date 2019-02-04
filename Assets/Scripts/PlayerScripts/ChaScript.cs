@@ -15,7 +15,7 @@ public class ChaScript : MonoBehaviour
     private bool toggleWait;
     public bool attacking;
 
-    private int num;
+    public int num;
     public bool canClick;
     public bool damage;
 
@@ -247,6 +247,8 @@ public class ChaScript : MonoBehaviour
         if (canClick && num<=3)
         {
             num++;
+            sword.GetComponent<Weapon>().Increase();
+            
         }
         //determines what attack will be done.. granted we have only one combo, we have one set of animations that
         //play when the player is moving vs when the player is standing still. The third id
