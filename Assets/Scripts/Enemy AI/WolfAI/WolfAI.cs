@@ -63,6 +63,11 @@ public class WolfAI : MonoBehaviour
     void Update()
     {
 
+        if(this.GetComponent<Health>().currentHealth == 0)
+        {
+            currentState = states.death;
+        }
+
         if (Vector3.Distance(Player.transform.position, transform.position) < 70 && currentState == states.wander)
         {
             currentState = states.chase;
@@ -101,6 +106,10 @@ public class WolfAI : MonoBehaviour
                     anim.SetInteger("animation", 11);
                 }
                 else { anim.SetInteger("animation", 10); }
+                break;
+
+            case states.death:
+                anim.SetInteger("animation", 0);
                 break;
         }
     }

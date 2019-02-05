@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Health : MonoBehaviour {
 
     public float maxHealth;
     public float currentHealth;
+    public Image hpBar;
     private bool wait;
 
 	// Use this for initialization
@@ -22,6 +24,11 @@ public class Health : MonoBehaviour {
         if (!wait)
         {
             currentHealth -= num;
+
+            if(transform.tag == "Enemy")
+            {
+                hpBar.fillAmount = currentHealth / maxHealth;
+            }
             Debug.Log(currentHealth);
             if(currentHealth <= 0)
             {

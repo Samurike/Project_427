@@ -116,6 +116,16 @@ public class BossAI : MonoBehaviour {
            // Debug.Log("Rawr");
             wait = true;
         }
+        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("2HitComboAttackForward"))
+        {
+            anim.SetInteger("animation", 1);
+            wait = true;
+        }
+        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("roar"))
+        {
+            anim.SetInteger("animation", 1);
+            wait = true;
+        }
         else
         {
             wait = false;

@@ -3437,15 +3437,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 428530, guid: 2a972a4ce5036c2459c4bea45ef9921d, type: 2}
       propertyPath: m_LocalScale.x
-      value: 11.945693
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 428530, guid: 2a972a4ce5036c2459c4bea45ef9921d, type: 2}
       propertyPath: m_LocalScale.y
-      value: 11.945693
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 428530, guid: 2a972a4ce5036c2459c4bea45ef9921d, type: 2}
       propertyPath: m_LocalScale.z
-      value: 11.945693
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 453798, guid: 2a972a4ce5036c2459c4bea45ef9921d, type: 2}
       propertyPath: m_RootOrder
@@ -4259,6 +4259,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerTransform: {fileID: 1444048319}
   targetSpot: {fileID: 1328200366}
+  t: {fileID: 0}
   SmoothFactor: 1.5
   LookAtPlayer: 0
   RotateAroundPlayer: 1
@@ -4361,6 +4362,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 15
   currentHealth: 0
+  hpBar: {fileID: 0}
 --- !u!1001 &1638850290
 Prefab:
   m_ObjectHideFlags: 0

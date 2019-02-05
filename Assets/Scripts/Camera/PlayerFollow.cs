@@ -8,7 +8,7 @@ public class PlayerFollow : MonoBehaviour
     public Transform PlayerTransform;
     private Vector3 cameraOffset;
     public Transform targetSpot;
-    private Transform t;
+    public Transform t;
 
     [Range(0.01f, 1.5f)]
     public float SmoothFactor = 0.5f;
@@ -49,16 +49,11 @@ public class PlayerFollow : MonoBehaviour
             {
                 if (hit.transform.root.transform.tag == "Enemy")
                 {
-                    hit.transform.Find("AimCube");
                     t = hit.transform.GetChild(0).transform;
                     Debug.DrawLine(targetSpot.transform.position, hit.transform.position, Color.cyan, 1f);
                 }
 
             }
-        }
-        else
-        {
-            t = PlayerTransform.transform;
         }
 
         if (Input.GetMouseButtonDown(1))
@@ -93,13 +88,22 @@ public class PlayerFollow : MonoBehaviour
 
 
             transform.position = Vector3.Slerp(transform.position, newPos, SmoothFactor);
-                 
-            
 
-            if (LookAtPlayer || RotateAroundPlayer)
+
+            if (!toggled)
             {
-                transform.LookAt(t.transform);
+                if (LookAtPlayer || RotateAroundPlayer)
+                {
+                    transform.LookAt(PlayerTransform.transform);
+                }
             }
+            else
+            {
+                transform.LookAt(t);
+                PlayerTransform.LookAt(t);
+                Debug.Log(t.transform.name);
+            }
+
         }
     }
 }
