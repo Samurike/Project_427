@@ -42,4 +42,28 @@ public class Health : MonoBehaviour {
             Debug.Log("He a Dead Boi Now");
         }
     }
+
+    public void getHealth(float num)
+    {
+        currentHealth += num;
+        
+        if (currentHealth >= maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+
+    }
+
+    public void getMana(float num)
+    {
+        currentEnergy += num;
+
+        if (currentEnergy >= maxEnergy)
+        {
+            currentEnergy = maxEnergy;
+        }
+    }
+
+
+
 }
