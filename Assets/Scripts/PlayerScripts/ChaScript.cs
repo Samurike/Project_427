@@ -164,8 +164,10 @@ public class ChaScript : MonoBehaviour
         //Call for direction movement for combat.
         Moving();
         //Call for Attack if pressed.
-        if (Input.GetMouseButtonDown(0)) {
-            Attacking(); }
+        if (Input.GetMouseButtonDown(0))
+        {
+            Attacking();
+        }
 
 
 
@@ -189,8 +191,8 @@ public class ChaScript : MonoBehaviour
             if (Input.GetKey(KeyCode.LeftShift)) { Running(); }
             else
             {
-                 anim.SetBool("runNormal", false);
-                 this.GetComponent<PlayerController>().speed = combatSpeed;
+                anim.SetBool("runNormal", false);
+                this.GetComponent<PlayerController>().speed = combatSpeed;
             }
 
         }
@@ -226,19 +228,33 @@ public class ChaScript : MonoBehaviour
         {
             anim.SetBool("walkRightCombat", false);
         }
+
+        Running();
     }
 
     //Handles Running and running attack.
     void Running()
     {
-        anim.SetBool("runNormal", true);
-        this.GetComponent<PlayerController>().speed = runSpeed;
 
-        //Slows down the player if they are attacking while running.
-        if (Input.GetKey(KeyCode.Mouse0))
+        if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.LeftShift))
         {
-            this.GetComponent<PlayerController>().speed = combatSpeed;
+            anim.SetBool("runNormal", true);
+            this.GetComponent<PlayerController>().speed = runSpeed;
+
+            //Slows down the player if they are attacking while running.
+            if (Input.GetKey(KeyCode.Mouse0))
+            {
+                this.GetComponent<PlayerController>().speed = combatSpeed;
+            }
+
         }
+        else
+        {
+            anim.SetBool("runNormal", false);
+            this.GetComponent<PlayerController>().speed = townSpeed;
+        }
+
+
 
     }
 
@@ -249,15 +265,16 @@ public class ChaScript : MonoBehaviour
     {
         attacking = true;
         //keeps a click counter for combo
-        if (canClick && num<=3)
+        if (canClick && num <= 3)
         {
             num++;
             sword.GetComponent<Weapon>().Increase();
-            
+
         }
         //determines what attack will be done.. granted we have only one combo, we have one set of animations that
         //play when the player is moving vs when the player is standing still. The third id
-        if(num == 1){
+        if (num == 1)
+        {
 
             if (anim.GetInteger("moving") == 0)
             {
@@ -300,21 +317,22 @@ public class ChaScript : MonoBehaviour
             anim.SetInteger("animation", 20);
             StartCoroutine("Wait");
         }
-        else if ((anim.GetCurrentAnimatorStateInfo(0).IsName("attack2") || anim.GetCurrentAnimatorStateInfo(0).IsName("attack2f")) && num == 2)
-        {  //If the second animation is still playing and only 2 clicks have happened, return to idle    
-            anim.SetInteger("animation", 1);
-            StartCoroutine("Wait");
-            num = 0;
-        }
         else if ((anim.GetCurrentAnimatorStateInfo(0).IsName("attack2") || anim.GetCurrentAnimatorStateInfo(0).IsName("attack2f")) && num >= 3)
         {  //If the second animation is still playing and at least 3 clicks have happened, continue the combo
             damage = true;
             anim.SetInteger("animation", 30);
             StartCoroutine("Wait");
         }
+        else if ((anim.GetCurrentAnimatorStateInfo(0).IsName("attack2") || anim.GetCurrentAnimatorStateInfo(0).IsName("attack2f")) && num == 2)
+        {  //If the second animation is still playing and only 2 clicks have happened, return to idle    
+            anim.SetInteger("animation", 1);
+            StartCoroutine("Wait");
+            num = 0;
+        }
+
         else if (anim.GetCurrentAnimatorStateInfo(0).IsName("attack4") || anim.GetCurrentAnimatorStateInfo(0).IsName("attack4f"))
         { //Since this is the third and last animation, return to idle          
-            anim.SetInteger("animation", 1);
+            if(Input.GetKey(KeyCode.Space) && Input.GetKey(KeyCode.D)) { anim.SetInteger("animation", 60); } else { anim.SetInteger("animation", 1); }
             StartCoroutine("Wait");
             num = 0;
         }
@@ -327,7 +345,8 @@ public class ChaScript : MonoBehaviour
         }
         else if (anim.GetCurrentAnimatorStateInfo(0).IsName("dodgeLeft") || anim.GetCurrentAnimatorStateInfo(0).IsName("dodgeRight"))
         { // 
-            anim.SetInteger("animation", 1);            
+            if (Input.GetMouseButton(0)) { Debug.Log("assda"); anim.SetInteger("animation", 10); }
+            else { anim.SetInteger("animation", 1); }
             this.GetComponent<PlayerController>().speed = combatSpeed;
             StartCoroutine("Wait");
             num = 0;
@@ -335,4 +354,5 @@ public class ChaScript : MonoBehaviour
 
 
     }
+
 }

@@ -21,16 +21,16 @@ public class Weapon : MonoBehaviour
     {
         //this.GetComponent<Collider>().enabled = false;
 
-        check = false;
+        //check = false;
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.transform.root.transform.tag == "Enemy")
         {
-            check = true;
+            //check = true;
             if (anim.GetCurrentAnimatorStateInfo(0).IsName("attack3") || anim.GetCurrentAnimatorStateInfo(0).IsName("attack3f"))
-            {                
+            {
                 other.transform.root.GetComponent<Health>().takeDamage(damage); 
                 
             }else if (anim.GetCurrentAnimatorStateInfo(0).IsName("attack2") || anim.GetCurrentAnimatorStateInfo(0).IsName("attack2f"))
@@ -39,6 +39,10 @@ public class Weapon : MonoBehaviour
             } else if (anim.GetCurrentAnimatorStateInfo(0).IsName("attack4") || anim.GetCurrentAnimatorStateInfo(0).IsName("attack4f"))
             {
                 other.transform.root.GetComponent<Health>().takeDamage(damage*2);
+            }
+             else if (anim.GetCurrentAnimatorStateInfo(0).IsName("attackRunning1"))
+            {
+                other.transform.root.GetComponent<Health>().takeDamage(damage+5);
             }
 
         }
