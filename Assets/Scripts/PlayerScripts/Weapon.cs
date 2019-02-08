@@ -29,15 +29,16 @@ public class Weapon : MonoBehaviour
         if (other.transform.root.transform.tag == "Enemy")
         {
             check = true;
-            if (anim.GetCurrentAnimatorStateInfo(0).IsName("attack3"))
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("attack3") || anim.GetCurrentAnimatorStateInfo(0).IsName("attack3f"))
+            {                
+                other.transform.root.GetComponent<Health>().takeDamage(damage); 
+                
+            }else if (anim.GetCurrentAnimatorStateInfo(0).IsName("attack2") || anim.GetCurrentAnimatorStateInfo(0).IsName("attack2f"))
             {
-                other.transform.root.GetComponent<Health>().takeDamage(damage/3);
-            }else if (anim.GetCurrentAnimatorStateInfo(0).IsName("attack2"))
+                other.transform.root.GetComponent<Health>().takeDamage(damage*2);
+            } else if (anim.GetCurrentAnimatorStateInfo(0).IsName("attack4") || anim.GetCurrentAnimatorStateInfo(0).IsName("attack4f"))
             {
-                other.transform.root.GetComponent<Health>().takeDamage(damage);
-            } else if (anim.GetCurrentAnimatorStateInfo(0).IsName("attack4"))
-            {
-                other.transform.root.GetComponent<Health>().takeDamage(damage /2);
+                other.transform.root.GetComponent<Health>().takeDamage(damage*2);
             }
 
         }

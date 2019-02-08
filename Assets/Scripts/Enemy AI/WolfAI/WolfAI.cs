@@ -25,6 +25,9 @@ public class WolfAI : MonoBehaviour
     private Vector3 newPos;
     private bool findNext;
     private Animator anim;
+    private int num;
+    private bool wait;
+    private bool dead;
 
 
 
@@ -55,7 +58,6 @@ public class WolfAI : MonoBehaviour
 
         Vector3 relativePosition = newPos - transform.position;
         to = Quaternion.LookRotation(relativePosition);
-
         StartCoroutine("turnTimer");
     }
 
@@ -63,18 +65,29 @@ public class WolfAI : MonoBehaviour
     void Update()
     {
 
-        if(this.GetComponent<Health>().currentHealth == 0)
+        if(this.GetComponent<Health>().currentHealth <= 0)
         {
+            if (!dead) { Camera.main.GetComponent<TrainingQuest>().Increment(); dead = true; }
+            transform.Find("EnemyCanvas").gameObject.SetActive(false);
             currentState = states.death;
         }
 
         if (Vector3.Distance(Player.transform.position, transform.position) < 70 && currentState == states.wander)
         {
             currentState = states.chase;
+            num = 0;
+        }
+
+        if (Vector3.Distance(Player.transform.position, transform.position) < 100 && !(Vector3.Distance(Player.transform.position, transform.position) < 70))
+        {
+            currentState = states.wander;
+            if (num == 0) {StartCoroutine("turnTimer"); num++; }
+            
+
         }
 
 
-            switch (currentState)
+        switch (currentState)
         {
             case states.wander:
                 anim.SetInteger("animation", 1);
@@ -101,21 +114,75 @@ public class WolfAI : MonoBehaviour
 
             case states.attack:
                 transform.LookAt(Player.transform);
-                if (Vector3.Distance(Player.transform.position, transform.position) > 20)
+                if (Vector3.Distance(Player.transform.position, transform.position) > 22)
                 {
-                    anim.SetInteger("animation", 11);
+                    anim.SetInteger("animation", 13);
                 }
-                else { anim.SetInteger("animation", 10); }
+                if (!wait) { StartCoroutine("NextAttack"); }
+
                 break;
 
             case states.death:
                 anim.SetInteger("animation", 0);
+                this.GetComponent<WolfAI>().enabled = false;
                 break;
         }
     }
 
 
-    void nextPos()
+    private IEnumerator NextAttack()
+    {
+        wait = true;
+        anim.SetInteger("animation", 10);
+        yield return new WaitForSeconds(2.4f);
+        float num = Random.value;
+        anim.SetInteger("animation", 11);
+    }
+
+    public void ComboCheck()
+    {
+        //DamageCheck();
+        int num = Random.Range(1, 3);
+
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Bite"))
+        {
+            //Debug.Log("lolol");
+            DamageCheck();
+            anim.SetInteger("animation", 10);
+            wait = false;
+        }
+
+        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("jumpBite_RM"))
+        {
+            DamageCheck();
+            anim.SetInteger("animation", 12);
+            //Debug.Log("now Left");
+            wait = true;
+        }
+        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("jumpBite_RM"))
+        {
+            DamageCheck();
+            anim.SetInteger("animation", 10);
+            //Debug.Log("Boffa");
+            wait = false; 
+        }
+        else
+        {
+            wait = false;
+        }
+
+    }
+
+    public void DamageCheck()
+    {
+
+        if (Vector3.Distance(Player.transform.position, transform.position) < 15)
+        {
+            Player.GetComponent<Health>().takeDamage(10f);
+        }
+    }
+
+   void nextPos()
     {
         x = Random.Range(minX, MaxX);
         if (Random.value > .5f)
@@ -137,12 +204,7 @@ public class WolfAI : MonoBehaviour
     }
 
 
-    public void CombatStance()
-    {
-        Debug.Log("here");
-        anim.SetInteger("animation", 10);
-    }
-
+    //Finds the next position for the w
     private IEnumerator turnTimer()
     {
         yield return new WaitForSeconds(3f);
@@ -150,7 +212,6 @@ public class WolfAI : MonoBehaviour
         yield return new WaitForSeconds(.01f);
         findNext = false;
     }
-
 
 }
 

@@ -10,12 +10,9 @@ public class PlayerController : MonoBehaviour
     public float speed = 5.0f;
     public float turnSmoothing = 15f;
     public float speedDampTime = 0.1f;
-    public float force = -20;
-    public float thrust;
-    private bool isGrounded;
     public bool dodge;
     public bool wait;
-    private int num;
+    private int num, change;
     private bool grounded;
     private Animator anim;
 
@@ -23,94 +20,84 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         anim = this.GetComponent<Animator>();
+        num = 2;
     }
 
 
-    void LateUpdate()
+    void Update()
     {
+        if(this.GetComponent<Health>().currentHealth > 0)
+        {
+       
+            var CharacterRotation = cam.transform.rotation;
+            CharacterRotation.x = 0;
+            CharacterRotation.z = 0;
 
-            float lh = Input.GetAxisRaw("Horizontal");
+            transform.rotation = CharacterRotation;
+
+        }
 
 
-            var newRotation = new Vector3(cam.eulerAngles.x, cam.eulerAngles.y, transform.eulerAngles.z);
+
+        /*float lh = Input.GetAxisRaw("Horizontal");
+
+        var newRotation = new Vector3(transform.eulerAngles.x, cam.eulerAngles.y, transform.eulerAngles.z);
+
+        if (lh != 0f)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(newRotation), speedDampTime * turnSmoothing * Time.deltaTime);
+            transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
+
+        }
 
 
-            if (lh != 0f)
-            {
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(newRotation), speedDampTime * turnSmoothing * Time.deltaTime);
-                transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
-               // rb.MoveRotation(transform.rotation);
-            }
-            transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, cam.transform.localEulerAngles.y, transform.localEulerAngles.z);
-
+        transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, cam.transform.localEulerAngles.y, transform.localEulerAngles.z);
+        */
     }
-    
+
 
 
 
     private void FixedUpdate()
     {
-
-        //transform.position = new Vector3(transform.position.x, -.081f, transform.position.z);
-
-        if (Input.GetKey(KeyCode.W) && !(anim.GetCurrentAnimatorStateInfo(0).IsName("dodgeLeft") || anim.GetCurrentAnimatorStateInfo(0).IsName("dodgeRight")))
+        if(this.GetComponent<Health>().currentHealth > 0)
         {
-            transform.Translate(Vector3.forward * speed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.A) && !(this.GetComponent<Animator>().GetBool("runNormal")) && this.GetComponent<ChaScript>().combat)
-        {
-            transform.Translate(Vector3.left * speed * Time.deltaTime);
-        }
-
-        if (Input.GetKey(KeyCode.D) && !(this.GetComponent<Animator>().GetBool("runNormal")) && this.GetComponent<ChaScript>().combat)
-        {
-            transform.Translate(Vector3.right * speed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            transform.Translate(Vector3.back * speed * Time.deltaTime);
-        }
-
-
-        ///////////////////////////////////////////////////////
-        ///
-        if ((!wait && this.GetComponent<ChaScript>().combat))
-        {
-            if (anim.GetInteger("animation") == 50 && !this.GetComponent<ChaScript>().attacking)
+            if (Input.GetKey(KeyCode.W) && !(anim.GetCurrentAnimatorStateInfo(0).IsName("dodgeLeft") || anim.GetCurrentAnimatorStateInfo(0).IsName("dodgeRight")))
             {
-                num = 0;
-                StartCoroutine("Dodge");
+                transform.Translate(Vector3.forward * speed * Time.deltaTime);
             }
-            if (anim.GetInteger("animation") == 60 && !this.GetComponent<ChaScript>().attacking)
+            if (Input.GetKey(KeyCode.A) && !(this.GetComponent<Animator>().GetBool("runNormal")) && this.GetComponent<ChaScript>().combat)
             {
-                num = 1;
-                StartCoroutine("Dodge");
+                transform.Translate(Vector3.left * speed * Time.deltaTime);
+            }
+
+            if (Input.GetKey(KeyCode.D) && !(this.GetComponent<Animator>().GetBool("runNormal")) && this.GetComponent<ChaScript>().combat)
+            {
+                transform.Translate(Vector3.right * speed * Time.deltaTime);
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                transform.Translate(Vector3.back * speed * Time.deltaTime);
+            }
+
+
+            ///////////////////////////////////////////////////////
+            ///
+            if ((!wait && this.GetComponent<ChaScript>().combat))
+            {
+                if (anim.GetInteger("animation") == 50 && !this.GetComponent<ChaScript>().attacking)
+                {
+                    this.GetComponent<Health>().Iframess();
+                    transform.Translate(Vector3.left * 30 * Time.deltaTime);
+                }
+                if (anim.GetInteger("animation") == 60 && !this.GetComponent<ChaScript>().attacking)
+                {
+                    this.GetComponent<Health>().Iframess();
+                    transform.Translate(Vector3.right * 30 * Time.deltaTime);
+                }
             }
         }
-
-
-        if (dodge && num == 0)
-            {
-                transform.Translate(Vector3.left * 35 * Time.deltaTime);
-            }
-        if (dodge && num == 1)
-        {
-            transform.Translate(Vector3.right * 35 * Time.deltaTime);
-        }
-
     }
-        /////////////////////////////////////////////////////////
-    
-    private IEnumerator Dodge()
-    {
-        dodge = true;
-        wait = true;
-        yield return new WaitForSeconds(.5f);
-        dodge = false;
-        yield return new WaitForSeconds(1f);
-        wait = false;
-    }
-
 }
 
 

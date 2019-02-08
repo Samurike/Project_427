@@ -35,13 +35,14 @@ public class ChaScript : MonoBehaviour
         canClick = true;
         num = 0;
         m_Collider = sword.GetComponent<Collider>();
-
+        anim.SetInteger("animation", 1);
 
     }
 
 
     private void Update()
     {
+        if (this.GetComponent<Health>().currentHealth == 0) { anim.SetInteger("animation", 0); }
         Physics.gravity = new Vector3(0, -4800f * Time.deltaTime, 0);
 
         //Starts the Timer for the Switch between Combat and NonCombat Mode.
@@ -64,12 +65,12 @@ public class ChaScript : MonoBehaviour
         if (!combat)
         {
             Forward();
+
         }
         else
         {
             Combat();
         }
-
     }
 
 
@@ -102,7 +103,8 @@ public class ChaScript : MonoBehaviour
 
     //This handles all NON-Combat motions such as running / walking / and idle without the weapon. 
     void Forward()
-    { 
+    {
+        this.GetComponent<BoxCollider>().isTrigger = false;
 
         //resets the click count incase of a break.
         num = 0;
@@ -150,6 +152,9 @@ public class ChaScript : MonoBehaviour
     //Handles all combat abilites
     void Combat()
     {
+        this.GetComponent<BoxCollider>().isTrigger = true;
+
+
         //Turns the sword and shield visible to the player
         shield.SetActive(true);
         sword.SetActive(true);
@@ -321,8 +326,8 @@ public class ChaScript : MonoBehaviour
             num = 0;
         }
         else if (anim.GetCurrentAnimatorStateInfo(0).IsName("dodgeLeft") || anim.GetCurrentAnimatorStateInfo(0).IsName("dodgeRight"))
-        { //Attacks horizontally if left clicked while running.         
-            anim.SetInteger("animation", 1);
+        { // 
+            anim.SetInteger("animation", 1);            
             this.GetComponent<PlayerController>().speed = combatSpeed;
             StartCoroutine("Wait");
             num = 0;
@@ -330,6 +335,4 @@ public class ChaScript : MonoBehaviour
 
 
     }
-
-
 }
