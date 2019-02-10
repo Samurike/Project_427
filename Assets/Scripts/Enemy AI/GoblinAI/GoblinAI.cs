@@ -14,18 +14,21 @@ public class GoblinAI : MonoBehaviour
 
     [SerializeField] float chaseRange = 5f;
     [SerializeField] float attackRadius = 5f;
-    private int num;
+    private int num, cNum, attackNum;
     private bool wait;
     private Animator playerAnim;
     private float distance;
 
-    public enum states { idle, damaged, attack, death, strafe };
+    public enum states { idle, damaged, attack, death, defend, chase };
     states currentState = states.idle;
+
+    private bool mode;
 
     // Use this for initialization
     void Start()
     {
-        num = 3;
+        num = 20;
+        attackNum = 21;
         anim = this.GetComponent<Animator>();
         playerAnim = player.GetComponent<Animator>();
     }
@@ -37,18 +40,9 @@ public class GoblinAI : MonoBehaviour
 
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("strafeLeftSwordShield_RM")) { transform.Translate(Vector3.left * 8 * Time.deltaTime); }
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("strafeRightSwordShield_RM")) { transform.Translate(Vector3.right * 8 * Time.deltaTime); }
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("walkForwardSwordShield")) { transform.Translate(Vector3.forward * 8 * Time.deltaTime); }
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("walkForwardSwordShield_RM")) { transform.Translate(Vector3.forward * 18 * Time.deltaTime); }
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("runSwordShield_RM")) { transform.Translate(Vector3.forward * 31 * Time.deltaTime); }
 
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("runSwordShield_RM"))
-        {
-            if (Vector3.Distance(player.transform.position, transform.position) > 18) { transform.Translate(Vector3.forward * 20 * Time.deltaTime); }
-            else
-            {
-                Debug.Log("sda");
-                anim.SetInteger("animation", 21);
-            }
-
-        }
 
         //float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
         if (this.GetComponent<Health>().currentHealth == 0)
@@ -58,16 +52,28 @@ public class GoblinAI : MonoBehaviour
         switch (currentState)
         {
             case states.idle:
+
+                if (distance < 80 && distance > 20 && !(anim.GetCurrentAnimatorStateInfo(0).IsName("idleSlingshotToAimSlingshot") || anim.GetCurrentAnimatorStateInfo(0).IsName("shootSlingShot")))
+                {
+                    currentState = states.chase;
+
+                }
                 anim.SetInteger("moving", 0);
                 anim.SetInteger("animation", 1);
                 break;
             case states.attack:
+                mode = false;
                 anim.SetInteger("moving", 2);
-                Attacking();
+                Attack();
                 break;
-            case states.strafe:
+            case states.chase:
+                mode = true;
+                transform.LookAt(player.transform);
+                anim.SetInteger("animation", 11);
+                break;
+            case states.defend:
                 anim.SetInteger("moving", 1);
-                Strafe();
+                Defend();
                 break;
             case states.death:
                 anim.SetInteger("moving", 0);
@@ -76,42 +82,56 @@ public class GoblinAI : MonoBehaviour
 
         }
 
-        if (distance < 60)
+
+        if (distance > 13 && distance <=18)
         {
-            currentState = states.strafe;
-            transform.LookAt(player.transform);
+            if (mode)
+            {
+
+                int rand = Random.Range(1, 3);
+                Debug.Log(rand);
+                mode = false;
+                if (rand == 1)
+                {
+                    currentState = states.attack;
+                }
+                else { anim.SetInteger("animation", 3);  currentState = states.defend; }
+            }
+
+        }
+        else if(distance < 10)
+        {
+            currentState = states.attack;
         }
 
 
     }
 
-    private void Strafe()
+    private void Defend()
     {
-        
+        transform.LookAt(player.transform);
+        mode = false;
+        Debug.Log("def");
+        float startTime = 0;
         if (!player.GetComponent<ChaScript>().attacking)
         {
-            
-            if(distance< 25)
+
+            if (distance < 21)
             {
-                float startTime = Time.time;
-                float eTime = Time.time - startTime;
-
-
-                if (eTime > 4) { currentState = states.attack; }
 
 
                 anim.SetInteger("animation", num);
                 switch (num)
                 {
-                    case 3:
-                        anim.SetInteger("animation", 3);
-                        if (!wait) {StartCoroutine("ChangeNum"); }                      
+                    case 20:
+                        startTime = Time.time;
+                        if (!wait) { StartCoroutine("ChangeNum"); }
                         break;
-                    case 4:
+                    case 18:
                         if (!wait)
                             StartCoroutine("ChangeNum");
                         break;
-                    case 5:
+                    case 19:
                         if (!wait)
                             StartCoroutine("ChangeNum");
                         break;
@@ -119,25 +139,68 @@ public class GoblinAI : MonoBehaviour
             }
             else
             {
-                anim.SetInteger("animation", 7);
+
+                if (distance > 30 && !(anim.GetCurrentAnimatorStateInfo(0).IsName("idleSlingshotToAimSlingshot") || anim.GetCurrentAnimatorStateInfo(0).IsName("shootSlingShot")))
+                { currentState = states.chase; } else { anim.SetInteger("animation", 6);}
             }
         }
+
+
+        float eTime;
+        eTime = Time.time - startTime;
+        //Debug.Log(eTime);
+        if(eTime> startTime+ 6) { currentState = states.attack; }
     }
 
-    private void Attacking()
+    private void Attack()
     {
-        anim.SetInteger("animation", 21);
+        transform.LookAt(player.transform);
+        Debug.Log("tack");
+        
+
+
+        if(distance < 15)
+        {
+            anim.SetInteger("animation", attackNum);
+            switch (attackNum)
+            {            
+                case 20:
+                    if (!wait) { StartCoroutine("ChangeAttack"); }              
+                    break;
+                case 21:
+                    if (!wait) { StartCoroutine("ChangeAttack"); }
+                    break;
+            }
+        }
+
+        if(distance> 18 && distance< 28){ anim.SetInteger("animation", 7); }
+
+
     }
 
     private IEnumerator ChangeNum()
     {
         wait = true;
-        var x = Random.Range(4, 6);
+        var x = Random.Range(18, 21);
         num = x;
-        yield return new WaitForSeconds(1.2f);      
-        Debug.Log(num);
+        yield return new WaitForSeconds(1.2f);
         wait = false;
+    }
 
+    private IEnumerator ChangeAttack()
+    {
+        wait = true;
+        var x = Random.Range(20, 22);
+        attackNum = x;
+        yield return new WaitForSeconds(1.2f);
+        wait = false;
+    }
+
+
+    public void Fire()
+    {Debug.Log(anim.GetCurrentAnimatorStateInfo(0).IsName("shootSlingshot"));
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("idleSlingshotToAimSlingshot")) { anim.SetInteger("animation", 8);}
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("shootSlingShot")) {  anim.SetInteger("animation", 7); }
 
     }
 }
