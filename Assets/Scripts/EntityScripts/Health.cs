@@ -8,7 +8,6 @@ public class Health : MonoBehaviour
 
     public float maxHealth;
     public float currentHealth;
-    public Image hpBar;
     private bool wait;
 
 
@@ -23,9 +22,10 @@ public class Health : MonoBehaviour
         currentHealth = maxHealth;
         currentEnergy = maxEnergy;
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
 
         if (transform.tag == "Player")
         {
@@ -33,23 +33,10 @@ public class Health : MonoBehaviour
             imgEN.fillAmount = currentEnergy / maxEnergy;
         }
 
-
-    // Use this for initialization
-    void Start()
-    {
-        currentHealth = maxHealth;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Y))
+        if(transform.tag == "Enemy")
         {
-            currentHealth -= 5;
+            imgHP.fillAmount = currentHealth / maxHealth;
         }
-
-        hpBar.fillAmount = currentHealth / maxHealth;
-
     }
 
     public void takeDamage(float num)

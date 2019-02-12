@@ -9,6 +9,7 @@ public class Collectable : MonoBehaviour {
     [SerializeField] float manaAmount = 1f;
     [SerializeField] float radius = 10f;
     [SerializeField] float moveSpeed = 100f;
+    float dist;
 
     FloatObject floatScript;
 
@@ -24,8 +25,7 @@ public class Collectable : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         transform.LookAt(player);
-        float dist = Vector3.Distance(player.transform.position, this.transform.position);
-
+        dist = Vector3.Distance(player.transform.position, this.transform.position);
         if (dist < radius)
         {
             floatScript.enabled = false;

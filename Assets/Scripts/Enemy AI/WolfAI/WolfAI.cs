@@ -17,7 +17,10 @@ public class WolfAI : MonoBehaviour
     public GameObject Pole, Player;
     public float minX, MaxX;
     public float minZ, MaxZ;
+    [SerializeField] float horseDmg = 1;
 
+    [SerializeField] float health;
+    [SerializeField] GameObject healthOrb;
 
     private float x;
     private float z;
@@ -36,9 +39,7 @@ public class WolfAI : MonoBehaviour
     void Start()
     {
         anim = this.GetComponent<Animator>();
-
         currentState = states.wander;
-
 
         x = Random.Range(10.0f, 20.0f);
         if (Random.value > .5f)
@@ -55,7 +56,6 @@ public class WolfAI : MonoBehaviour
         newPos = new Vector3(center.x + x, -.2f, center.z + z);
         //Instantiate(Pole, newPos, Quaternion.identity);
 
-
         Vector3 relativePosition = newPos - transform.position;
         to = Quaternion.LookRotation(relativePosition);
         StartCoroutine("turnTimer");
@@ -64,6 +64,15 @@ public class WolfAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        health = GetComponent<Health>().currentHealth;
+        if (health <= 0)
+        {
+            for(int i = 0; i < 20; i++)
+            {
+                Instantiate(healthOrb, new Vector3(transform.position.x, transform.position.y + 6f, transform.position.z), Quaternion.identity);
+            }
+            
+        }
 
         if(this.GetComponent<Health>().currentHealth <= 0)
         {
@@ -178,7 +187,7 @@ public class WolfAI : MonoBehaviour
 
         if (Vector3.Distance(Player.transform.position, transform.position) < 15)
         {
-            Player.GetComponent<Health>().takeDamage(10f);
+            Player.GetComponent<Health>().takeDamage(horseDmg);
         }
     }
 

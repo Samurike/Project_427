@@ -16,14 +16,17 @@ public class ChaScript : MonoBehaviour
     public bool attacking;
 
     public int num;
-    public bool canClick;
+    private bool canClick;
     public bool damage;
+
 
 
     Collider m_Collider;
     public float runSpeed;
     public float combatSpeed;
     public float townSpeed;
+
+    public GameObject projectile;
 
     void Start()
     {
@@ -164,12 +167,16 @@ public class ChaScript : MonoBehaviour
         //Call for direction movement for combat.
         Moving();
         //Call for Attack if pressed.
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && anim.GetInteger("animation") != 120)
         {
             Attacking();
         }
 
-
+        if(Input.GetMouseButtonDown(1))
+        {
+            anim.SetInteger("animation" , 120);
+            Instantiate(projectile, transform.Find("ProjectileSpawn").transform.position, transform.Find("ProjectileSpawn").transform.rotation);
+        }
 
     }
     //Handles the direction movement for combat.
@@ -353,6 +360,11 @@ public class ChaScript : MonoBehaviour
         }
 
 
+    }
+
+    public void reeset()
+    {
+        anim.SetInteger("animation",1);
     }
 
 }

@@ -1,3 +1,0 @@
-﻿Camera Controller
-Version 3.341
-Oct 4, 2018
