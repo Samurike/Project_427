@@ -173,7 +173,7 @@ public class GoblinAI : MonoBehaviour
             }
         }
 
-        if(distance> 18 && distance< 28){ anim.SetInteger("animation", 7); }
+        if(distance> 22 && distance< 26){ anim.SetInteger("animation", 7); }
 
 
     }
@@ -200,7 +200,7 @@ public class GoblinAI : MonoBehaviour
     public void Fire()
     {Debug.Log(anim.GetCurrentAnimatorStateInfo(0).IsName("shootSlingshot"));
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("idleSlingshotToAimSlingshot")) { anim.SetInteger("animation", 8);}
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("shootSlingShot")) {  anim.SetInteger("animation", 7); }
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("shootSlingShot")) { currentState = states.chase; }
 
     }
 }
