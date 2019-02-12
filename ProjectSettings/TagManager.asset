@@ -5,7 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+
+  - Mana
+  - Health
   - Target
+
   layers:
   - Default
   - TransparentFX
