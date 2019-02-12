@@ -2,37 +2,61 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour {
+public class Weapon : MonoBehaviour
+{
 
     public float damage;
-    private bool wait = false;
     public GameObject player;
-    private bool w;
+    private Animator anim;
+    private bool check;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-
+    // Use this for initialization
+    void Start()
+    {
+        anim = player.GetComponent<Animator>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    // Update is called once per frame
+    void Update()
     {
-        if (other.tag == "Enemy" && !wait)
-            StartCoroutine("Damage", other);
+        //this.GetComponent<Collider>().enabled = false;
 
+        //check = false;
     }
 
-    private IEnumerator Damage(Collider other)
+    private void OnTriggerExit(Collider other)
     {
-        other.GetComponent<Health>().takeDamage(damage);
-        wait = true;
-        yield return new WaitForSeconds(.5f);
-        wait = false;
-        
-            
+        if (other.transform.root.transform.tag == "Enemy")
+        {
+            //check = true;
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("attack3") || anim.GetCurrentAnimatorStateInfo(0).IsName("attack3f"))
+            {
+                other.transform.root.GetComponent<Health>().takeDamage(damage); 
+                
+            }else if (anim.GetCurrentAnimatorStateInfo(0).IsName("attack2") || anim.GetCurrentAnimatorStateInfo(0).IsName("attack2f"))
+            {
+                other.transform.root.GetComponent<Health>().takeDamage(damage*2);
+            } else if (anim.GetCurrentAnimatorStateInfo(0).IsName("attack4") || anim.GetCurrentAnimatorStateInfo(0).IsName("attack4f"))
+            {
+                other.transform.root.GetComponent<Health>().takeDamage(damage*2);
+            }
+             else if (anim.GetCurrentAnimatorStateInfo(0).IsName("attackRunning1"))
+            {
+                other.transform.root.GetComponent<Health>().takeDamage(damage+5);
+            }
+
+        }
+    }
+
+    public void Increase()
+    {
+        StartCoroutine("Toggle");
+    }
+
+    private IEnumerator Toggle()
+    {
+        this.GetComponent<Collider>().enabled = true;
+        yield return new WaitForSeconds(.01f);
+        this.GetComponent<Collider>().enabled = false;
     }
 }
