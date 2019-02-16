@@ -3753,7 +3753,7 @@ MonoBehaviour:
   runSpeed: 42
   combatSpeed: 20
   townSpeed: 23
-  projectile: {fileID: 0}
+  projectile: {fileID: 1666664868875430, guid: 5dde7576a0e973347944065689e82b06, type: 2}
 --- !u!114 &114401800059943056
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3784,6 +3784,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
+  manaRegen: 0.01
   maxEnergy: 50
   currentEnergy: 0
   imgHP: {fileID: 0}

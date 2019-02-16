@@ -243,6 +243,14 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.16222483
+        functionName: Fireball
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 0edbcc4c5ae7cc34090582a42118f40b,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask:
       - path: 
         weight: 1
