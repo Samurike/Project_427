@@ -45,7 +45,7 @@ public class ChaScript : MonoBehaviour
 
     private void Update()
     {
-        if (this.GetComponent<Health>().currentHealth == 0) { anim.SetInteger("animation", 0); }
+        if (this.GetComponent<Health>().currentHealth <= 0) { anim.SetInteger("animation", 0); }
         Physics.gravity = new Vector3(0, -4800f * Time.deltaTime, 0);
 
         //Starts the Timer for the Switch between Combat and NonCombat Mode.

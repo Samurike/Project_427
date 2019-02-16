@@ -9,7 +9,7 @@ public class GoblinAI : MonoBehaviour
 
     private Animator anim;
     [SerializeField] GameObject player;
-
+    [SerializeField] private float dobbyDmg = 5f;
     [SerializeField] private float speed = 5f;
 
     [SerializeField] float chaseRange = 5f;
@@ -18,6 +18,7 @@ public class GoblinAI : MonoBehaviour
     private bool wait;
     private Animator playerAnim;
     private float distance;
+    private int ammo;
 
     public enum states { idle, damaged, attack, death, defend, chase };
     states currentState = states.idle;
@@ -27,6 +28,7 @@ public class GoblinAI : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        ammo = 3;
         num = 20;
         attackNum = 21;
         anim = this.GetComponent<Animator>();
@@ -45,7 +47,7 @@ public class GoblinAI : MonoBehaviour
 
 
         //float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
-        if (this.GetComponent<Health>().currentHealth == 0)
+        if (this.GetComponent<Health>().currentHealth <= 0)
         {
             currentState = states.death;
         }
@@ -78,6 +80,8 @@ public class GoblinAI : MonoBehaviour
             case states.death:
                 anim.SetInteger("moving", 0);
                 anim.SetInteger("animation", 0);
+                this.GetComponent<GoblinAI>().enabled = false;
+                transform.Find("EnemyCanvas").gameObject.SetActive(false);
                 break;
 
         }
@@ -111,7 +115,6 @@ public class GoblinAI : MonoBehaviour
     {
         transform.LookAt(player.transform);
         mode = false;
-        Debug.Log("def");
         float startTime = 0;
         if (!player.GetComponent<ChaScript>().attacking)
         {
@@ -155,7 +158,6 @@ public class GoblinAI : MonoBehaviour
     private void Attack()
     {
         transform.LookAt(player.transform);
-        Debug.Log("tack");
         
 
 
@@ -173,9 +175,18 @@ public class GoblinAI : MonoBehaviour
             }
         }
 
-        if(distance> 22 && distance< 26){ anim.SetInteger("animation", 7); }
+        if(distance> 22 && distance< 26 && ammo>=0){ anim.SetInteger("animation", 7); }
+        if (ammo <= 0) { currentState = states.chase; }
 
+    }
 
+    public void DamageCheck()
+    {
+
+        if (Vector3.Distance(player.transform.position, transform.position) < 15)
+        {
+            player.GetComponent<Health>().takeDamage(dobbyDmg);
+        }
     }
 
     private IEnumerator ChangeNum()
@@ -198,7 +209,8 @@ public class GoblinAI : MonoBehaviour
 
 
     public void Fire()
-    {Debug.Log(anim.GetCurrentAnimatorStateInfo(0).IsName("shootSlingshot"));
+    {
+        ammo -=1;
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("idleSlingshotToAimSlingshot")) { anim.SetInteger("animation", 8);}
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("shootSlingShot")) { currentState = states.chase; }
 

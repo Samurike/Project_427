@@ -85,7 +85,8 @@ public class Health : MonoBehaviour
 
     public void giveHealth(float giveAmount)
     {
-        currentHealth += giveAmount;
+        if(currentHealth < 100) {currentHealth += giveAmount; }
+        else { currentHealth = 100; }
     }
 
 
