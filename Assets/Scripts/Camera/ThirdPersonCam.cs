@@ -39,31 +39,6 @@ public class ThirdPersonCam : MonoBehaviour
 
         CameraControl();
 
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            toggled = false; ;
-        }
-
-
-        /*
-        if (Input.GetMouseButtonDown(1))
-        {
-
-            RaycastHit hit;
-            if (Physics.Raycast(aimCast.transform.position, aimCast.transform.forward, out hit, range))
-            {
-                if (hit.transform.root.transform.tag == "Enemy")
-                {
-                    Debug.Log("derp");
-                    if (toggled) { toggled = false; } else { toggled = true; }
-
-                    t = hit.transform.GetChild(0).transform;
-                    Debug.DrawLine(aimCast.transform.position, hit.transform.position, Color.cyan, 1f);
-                }
-            }
-        }*/
-
-
 
     }
 
