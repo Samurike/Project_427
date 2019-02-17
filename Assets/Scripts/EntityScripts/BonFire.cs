@@ -36,16 +36,23 @@ public class BonFire : MonoBehaviour {
 
         if(Bar.fillAmount == 1)
         {
-            if (!lit) { Camera.main.GetComponent<BraQuest>().Increment(); can.gameObject.SetActive(false); lit = true; }
+            try { if (!lit) { Camera.main.GetComponent<BraQuest>().Increment(); can.gameObject.SetActive(false); lit = true; }}
+            catch { lit = true; }
+            
             can.gameObject.SetActive(false);
             Fire.SetActive(true);
            
         }
 
-        if(Goblin0.GetComponent<Health>().currentHealth<= 0  && Goblin1.GetComponent<Health>().currentHealth <= 0)
+        if(transform.name != "townBra")
         {
-            dead = true;
+            if(Goblin0.GetComponent<Health>().currentHealth<= 0  && Goblin1.GetComponent<Health>().currentHealth <= 0)
+            {
+                dead = true;
+            }
         }
+        else { dead = true; }
+
 
     }
 
@@ -70,8 +77,8 @@ public class BonFire : MonoBehaviour {
 
     private void OnTriggerStay(Collider other)
     {
-
-            if(other.transform.tag == "Player" && lit && dead)
+        Debug.Log(lit);
+        if (other.transform.tag == "Player" && lit && dead)
             {
                 player.GetComponent<Health>().giveHealth(giveAmount);
             }
