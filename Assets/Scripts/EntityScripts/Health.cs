@@ -50,7 +50,6 @@ public class Health : MonoBehaviour
 
         currentHealth -= num;
 
-        Debug.Log(currentHealth);
         if(currentHealth <= 0)
 
         if (!wait) { currentHealth -= num; }

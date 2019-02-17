@@ -8,7 +8,10 @@ public class TrainingQuest : MonoBehaviour {
     public Text questText;
     int num;
     int len;
+    int questNum = 0;
     public GameObject[] enemies;
+    [SerializeField] Transform newPos;
+    [SerializeField] Transform rabbit;
 
     // Use this for initialization
     void Start () {
@@ -24,7 +27,10 @@ public class TrainingQuest : MonoBehaviour {
 
         if (num == len)
         {
-            questText.text = "Return the Rabbit";
+            rabbit.transform.position = newPos.transform.position;
+            rabbit.transform.rotation = newPos.transform.rotation;
+            questText.text = "Return the Rabbit At The Well";
+            rabbit.Find("Tutorial Rabbit").GetComponent<CameraZoomInScreen>().QuestNum();
         }
         else
         {
@@ -42,4 +48,6 @@ public class TrainingQuest : MonoBehaviour {
     {
         num++;
     }
+
+
 }
