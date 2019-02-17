@@ -12536,7 +12536,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Lolz
+  m_Text: Button 2
 --- !u!222 &680619424
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -27894,7 +27894,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0
-  m_Text: Wheres Jansen
+  m_Text: Title of Game
 --- !u!222 &1577171723
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -28253,7 +28253,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Jan, Who?
+  m_Text: Button 1
 --- !u!222 &1598217104
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -37228,7 +37228,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Mr NoShow?
+  m_Text: Button 3
 --- !u!222 &2132153875
 CanvasRenderer:
   m_ObjectHideFlags: 0
