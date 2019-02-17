@@ -1318,6 +1318,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 18
   currentHealth: 18
+  manaRegen: 0.01
   maxEnergy: 0
   currentEnergy: 0
   imgHP: {fileID: 114830124015790770}

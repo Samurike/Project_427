@@ -132,7 +132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthAmount: 0
   manaAmount: 3
-  radius: 15
+  radius: 20
   moveSpeed: 25
 --- !u!114 &114245242764030172
 MonoBehaviour:

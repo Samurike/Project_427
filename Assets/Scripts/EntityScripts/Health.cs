@@ -11,6 +11,8 @@ public class Health : MonoBehaviour
     private bool wait;
 
 
+    [SerializeField] float manaRegen = 0.01f;
+
     public float maxEnergy;
     public float currentEnergy;
 
@@ -37,6 +39,9 @@ public class Health : MonoBehaviour
         {
             imgHP.fillAmount = currentHealth / maxHealth;
         }
+
+        currentEnergy = currentEnergy + manaRegen;
+
     }
 
     public void takeDamage(float num)

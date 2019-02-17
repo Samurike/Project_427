@@ -5,7 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+  - enabled: 0
+    path: Assets/Scenes/Test Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/MainGameScenes/Adoran.unity
+    guid: 22e62b5b97492ed4c8f9ca0720bb43a8
+  - enabled: 1
+    path: Assets/Scenes/MainGameScenes/ForestArea.unity
+    guid: ff1bc4dd80308f74caa5c890730768ae
+  - enabled: 1
+    path: Assets/Scenes/MainGameScenes/CyclopsBoss.unity
+    guid: ad1fb46873b5bf64fa2a44df39653780
   m_configObjects: {}

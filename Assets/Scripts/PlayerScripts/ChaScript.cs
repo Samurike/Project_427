@@ -172,10 +172,10 @@ public class ChaScript : MonoBehaviour
             Attacking();
         }
 
-        if(Input.GetMouseButtonDown(1))
+        if(Input.GetMouseButtonDown(1) && gameObject.GetComponent<Health>().currentEnergy > 5)
         {
             anim.SetInteger("animation" , 120);
-            Instantiate(projectile, transform.Find("ProjectileSpawn").transform.position, transform.Find("ProjectileSpawn").transform.rotation);
+            
         }
 
     }
@@ -365,6 +365,11 @@ public class ChaScript : MonoBehaviour
     public void reeset()
     {
         anim.SetInteger("animation",1);
+    }
+
+    public void Fireball()
+    {
+        Instantiate(projectile, transform.Find("ProjectileSpawn").transform.position, transform.Find("ProjectileSpawn").transform.rotation);
     }
 
 }

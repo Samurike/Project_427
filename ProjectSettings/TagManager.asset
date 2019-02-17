@@ -8,8 +8,10 @@ TagManager:
   - Mana
   - Health
   - Target
+  - BarrierCarrot
   - Bra
   - cam
+
   layers:
   - Default
   - TransparentFX

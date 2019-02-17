@@ -67,7 +67,7 @@ public class WolfAI : MonoBehaviour
         health = GetComponent<Health>().currentHealth;
         if (health <= 0)
         {
-            for(int i = 0; i < 20; i++)
+            for(int i = 0; i < 5; i++)
             {
                 Instantiate(healthOrb, new Vector3(transform.position.x, transform.position.y + 6f, transform.position.z), Quaternion.identity);
             }
