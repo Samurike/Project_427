@@ -9,6 +9,9 @@ TagManager:
   - Health
   - Target
   - BarrierCarrot
+  - Bra
+  - cam
+
   layers:
   - Default
   - TransparentFX
