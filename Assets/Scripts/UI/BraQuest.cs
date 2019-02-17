@@ -24,7 +24,7 @@ public class BraQuest : MonoBehaviour {
 
         if (num == len)
         {
-            questText.text = "Enter The Den Of the Monster";
+            questText.text = "Return to Adoran and Talk To Twix";
         }
         else
         {
