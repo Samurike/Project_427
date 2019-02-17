@@ -193,3 +193,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carrotDmg: 9
+  deathDelay: 0.3

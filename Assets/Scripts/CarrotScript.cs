@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class CarrotScript : MonoBehaviour {
 
-    [SerializeField] float carrotDmg;
-    
+    [SerializeField] float carrotDmg = 3f;
+    [SerializeField] float deathDelay = 0.3f;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -21,16 +21,19 @@ public class CarrotScript : MonoBehaviour {
     {
         if(other.tag == "Player")
         {
-            other.GetComponent<Health>().takeDamage(carrotDmg); 
+            other.GetComponent<Health>().takeDamage(carrotDmg);
+
+            if (transform.gameObject.tag != "BarrierCarrot")
+            {
+                Destroy(gameObject, deathDelay);
+            }
+
         }
 
-        if (transform.gameObject.tag != "BarrierCarrot")
+        if(other.tag == "Projectile" && transform.gameObject.tag != "BarrierCarrot")
         {
-            Debug.Log("Hi");
-            Destroy(gameObject, 0.3f);
+            Destroy(gameObject);
         }
-
-
 
     }
 }

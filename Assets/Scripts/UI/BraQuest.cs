@@ -28,7 +28,7 @@ public class BraQuest : MonoBehaviour {
         }
         else
         {
-            questText.text = "Light the Braziers Around the Forest(" + num + " / " + len + ")";
+            questText.text = "Light the Braziers Around the Forest (" + num + " / " + len + ")";
         }
 
 

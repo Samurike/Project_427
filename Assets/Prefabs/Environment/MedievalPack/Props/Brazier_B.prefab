@@ -11,13 +11,12 @@ GameObject:
   - component: {fileID: 3300000}
   - component: {fileID: 2300000}
   - component: {fileID: 6500000}
-
   - component: {fileID: 135740488720494848}
   - component: {fileID: 114820911348263438}
-
+  - component: {fileID: 135149418317540188}
   m_Layer: 0
   m_Name: Brazier_B
-  m_TagString: Untagged
+  m_TagString: Bra
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -45,10 +44,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-
-  m_LocalPosition: {x: 73.78, y: 95.16, z: 263.01004}
+  m_LocalPosition: {x: -199.05579, y: -42.55072, z: 251.71252}
   m_LocalScale: {x: 18.459, y: 18.459032, z: 18.459032}
-
   m_Children:
   - {fileID: 4719531864267374}
   - {fileID: 400008}
@@ -121,8 +118,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.65617573, y: 0.6240602, z: 1.2027295}
-  m_Center: {x: 0.0000064791275, y: -0.000008193588, z: 0.58116496}
+  m_Size: {x: 1.1114366, y: 1.1673383, z: 1.2027296}
+  m_Center: {x: -0.017383207, y: -0.011333304, z: 0.581165}
 --- !u!108 &10800000
 Light:
   m_ObjectHideFlags: 1
@@ -409,7 +406,6 @@ Transform:
   m_Father: {fileID: 4719531864267374}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  
 --- !u!114 &114146428500840624
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -465,7 +461,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
 --- !u!114 &114820911348263438
-
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -476,13 +471,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1ef165b8bca2154589f90b3321a9c50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-
-  fillBar: 0
+  fillBar: 100
   giveAmount: 0.1
   Goblin0: {fileID: 0}
   Goblin1: {fileID: 0}
   Fire: {fileID: 1064787465429134}
   Bar: {fileID: 114174266476172750}
+  lit: 0
   can: {fileID: 223973776690894898}
 --- !u!114 &114876219815797098
 MonoBehaviour:
@@ -532,8 +527,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
---- !u!135 &135740488720494848
-
+--- !u!135 &135149418317540188
 SphereCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -544,9 +538,19 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 1.3
-
+  m_Center: {x: 0.5, y: 0.2, z: 0}
+--- !u!135 &135740488720494848
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.3
   m_Center: {x: 0, y: 0, z: 0}
-
 --- !u!198 &198034990543002980
 ParticleSystem:
   m_ObjectHideFlags: 1
