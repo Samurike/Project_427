@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainGameScenes/ForestArea.unity
     guid: ff1bc4dd80308f74caa5c890730768ae
+  - enabled: 1
+    path: Assets/Scenes/MainGameScenes/CyclopsBoss.unity
+    guid: ad1fb46873b5bf64fa2a44df39653780
   m_configObjects: {}
