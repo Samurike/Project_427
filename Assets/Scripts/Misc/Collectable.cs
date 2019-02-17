@@ -24,8 +24,9 @@ public class Collectable : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.LookAt(player);
+        //transform.LookAt(player);
         dist = Vector3.Distance(player.transform.position, this.transform.position);
+
         if (dist < radius)
         {
             floatScript.enabled = false;

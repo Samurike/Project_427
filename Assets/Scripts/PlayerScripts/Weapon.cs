@@ -29,6 +29,7 @@ public class Weapon : MonoBehaviour
         if (other.transform.root.transform.tag == "Enemy")
         {
             //check = true;
+            Debug.Log("hiii");
             if (anim.GetCurrentAnimatorStateInfo(0).IsName("attack3") || anim.GetCurrentAnimatorStateInfo(0).IsName("attack3f"))
             {
                 other.transform.root.GetComponent<Health>().takeDamage(damage); 
