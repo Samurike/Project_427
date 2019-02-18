@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainGameScenes/ForestAreaEnd.unity
     guid: fdfdcf1d9788dc24080c943f845870e9
+  - enabled: 1
+    path: Assets/Scenes/MainGameScenes/Death Scene.unity
+    guid: 36a9fbb5ccbc8df499aeac7681c2b736
   m_configObjects: {}
