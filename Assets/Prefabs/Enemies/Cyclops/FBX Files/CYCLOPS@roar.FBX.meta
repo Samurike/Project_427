@@ -168,23 +168,7 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events:
-      - time: 0.8355975
-        functionName: ComboCheck
-        data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 8bbb1cacb735dfa40b5f2d4f38f2939d,
-          type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.5039206
-        functionName: ComboCheck
-        data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 8bbb1cacb735dfa40b5f2d4f38f2939d,
-          type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
+      events: []
       transformMask:
       - path: 
         weight: 1
