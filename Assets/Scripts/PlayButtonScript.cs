@@ -6,10 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class PlayButtonScript : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+
+
+
+    // Use this for initialization
+    void Start () {
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -26,4 +28,15 @@ public class PlayButtonScript : MonoBehaviour {
         Application.Quit();
     }
 
+    public void OnClickMainMenu()
+    {
+        SceneManager.LoadScene("Main Menu");
+    }
+
+    public void OnClickRestart()
+    {
+        SceneManager.LoadScene("Adoran");
+    }
+
 }
+
