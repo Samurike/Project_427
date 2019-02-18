@@ -558,11 +558,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d00882fdd365d5f41b3be21c155f7e09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &40960542 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100000, guid: 4d6f41d299501254787c6fe388130209,
-    type: 2}
-  m_PrefabInternal: {fileID: 1432612910}
 --- !u!4 &42803639 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4600590482154918, guid: 13bf1455a4187c846a2660c224b9f0d4,
@@ -7756,11 +7751,6 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08119e5416420124b84672d7dd7b295f, type: 2}
   m_IsPrefabAsset: 0
---- !u!1 &865296509 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100000, guid: 4d6f41d299501254787c6fe388130209,
-    type: 2}
-  m_PrefabInternal: {fileID: 1942120584}
 --- !u!4 &866010459 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4600590482154918, guid: 13bf1455a4187c846a2660c224b9f0d4,
@@ -11963,6 +11953,29 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.39999998, y: 1.1802745, z: 0.39999998}
   m_Center: {x: 0, y: 0.65776235, z: 0}
+--- !u!114 &1360209585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1360209583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c743f5f307620f441a8422b06b1fdbe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scene: Death Scene
+--- !u!114 &1360209586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1360209583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cde7fd386ab15da49897235563e929c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1364652948
 Prefab:
   m_ObjectHideFlags: 0
@@ -14300,11 +14313,6 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58cd80e8735394b41ad92a2458c90f9a, type: 2}
   m_IsPrefabAsset: 0
---- !u!1 &1591520325 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100000, guid: 4d6f41d299501254787c6fe388130209,
-    type: 2}
-  m_PrefabInternal: {fileID: 600067721}
 --- !u!4 &1591908659 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 08119e5416420124b84672d7dd7b295f,
@@ -17269,11 +17277,6 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6564a5e1c5e6474f9d7ed2851d18ea7, type: 2}
   m_IsPrefabAsset: 0
---- !u!1 &1935564386 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100000, guid: 4d6f41d299501254787c6fe388130209,
-    type: 2}
-  m_PrefabInternal: {fileID: 1274137717}
 --- !u!4 &1939515402 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4373359711051192, guid: 90d641864f25fd14bbb9c882b2d00fc0,
@@ -18276,7 +18279,6 @@ GameObject:
   - component: {fileID: 2077486494}
   - component: {fileID: 2077486493}
   - component: {fileID: 2077486492}
-  - component: {fileID: 2077486498}
   m_Layer: 0
   m_Name: TransitionToAdoran
   m_TagString: Untagged
@@ -18317,7 +18319,7 @@ BoxCollider:
   m_GameObject: {fileID: 2077486491}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 3.0905666, y: 1.0601249, z: 1.322587}
   m_Center: {x: 1.0452859, y: 0.030063659, z: -0.16129331}
@@ -18376,21 +18378,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2077486498
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2077486491}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fde3b57c75f444544a43b133d6642165, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Bra0: {fileID: 865296509}
-  Bra1: {fileID: 1935564386}
-  Bra2: {fileID: 1591520325}
-  Bra3: {fileID: 40960542}
 --- !u!4 &2078982910 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: eb1c2142491bd0b4da8810c54807371e,

@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 110
-  projectileDamage: 3.5
+  projectileDamage: 50
   manaCost: -7
 --- !u!135 &135200635251347550
 SphereCollider:

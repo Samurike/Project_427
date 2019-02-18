@@ -5368,7 +5368,6 @@ GameObject:
   - component: {fileID: 655012346}
   - component: {fileID: 655012352}
   - component: {fileID: 655012351}
-  - component: {fileID: 655012348}
   - component: {fileID: 655012350}
   - component: {fileID: 655012347}
   m_Layer: 0
@@ -5414,19 +5413,6 @@ MonoBehaviour:
   camRotateX: {x: 0, y: 0, z: 0, w: 0}
   camRotateXY: {x: 0, y: 0, z: 0, w: 0}
   lookOffset: {x: 0, y: 0, z: 0}
---- !u!114 &655012348
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 655012345}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b587f336d1cb734db5314b6254f84f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  questText: {fileID: 1506176976}
-  bras: []
 --- !u!114 &655012350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13402,7 +13388,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: q
+  m_Text: Go to the door
 --- !u!222 &1506176977
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -15681,6 +15667,29 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 121202, guid: 90d641864f25fd14bbb9c882b2d00fc0,
     type: 2}
   m_PrefabInternal: {fileID: 1591862382}
+--- !u!114 &1734168045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1734168044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c743f5f307620f441a8422b06b1fdbe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scene: Death Scene
+--- !u!114 &1734168046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1734168044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cde7fd386ab15da49897235563e929c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1736285112 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 197044, guid: 5f0706883a962914493653ef8cb5bc61,
