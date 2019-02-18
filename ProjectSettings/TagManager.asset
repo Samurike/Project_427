@@ -12,6 +12,7 @@ TagManager:
   - Bra
   - cam
   - Projectile
+  - Horse
   layers:
   - Default
   - TransparentFX
