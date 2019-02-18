@@ -26,16 +26,7 @@ public class FinalBossManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-        if(Input.GetButtonDown("F"))
-        {
-            Destroy(obj4);
 
-            obj5.SetActive(false);
-            obj1.SetActive(true);
-            obj2.SetActive(true);
-            obj3.SetActive(true);
-
-        }
 
         if(rabbit.GetComponent<Health>().currentHealth <= -1)
         {
@@ -47,4 +38,18 @@ public class FinalBossManager : MonoBehaviour {
         }
 
 	}
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (Input.GetButtonDown("F"))
+        {
+            Destroy(obj4);
+
+            obj5.SetActive(false);
+            obj1.SetActive(true);
+            obj2.SetActive(true);
+            obj3.SetActive(true);
+
+        }
+    }
 }

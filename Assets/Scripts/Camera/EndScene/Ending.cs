@@ -16,6 +16,9 @@ public class Ending : MonoBehaviour {
     [SerializeField] Transform a;
     [SerializeField] Transform b;
 
+    bool wait;
+    bool start;
+
     // Use this for initialization
     void Start () {
         animO = cyclops.GetComponent<Animator>();
@@ -36,7 +39,16 @@ public class Ending : MonoBehaviour {
             {
                 ah.SetActive(false);
                 bah.SetActive(true);
+
+                if (!wait) { StartCoroutine("Down"); }
             }
         }
+
+        if (start) { if (bah.transform.position.y >= -378) { bah.transform.Translate(Vector3.down * 13 * Time.deltaTime); } }
 	}
+
+    private IEnumerator Down()
+    {
+        yield return new WaitForSeconds(1f);  start = true; 
+    }
 }
